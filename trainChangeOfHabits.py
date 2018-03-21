@@ -8,6 +8,7 @@ import tensorflow as tf
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
 import pandas as pd
+import pickle
 
 # Ignore all GPUs, tf random forest does not benefit from it.
 import os
@@ -25,7 +26,9 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
     # Random Forest Parameters
 
-    # Train test splitting data set 
+    # Train test splitting data set
+    # X == features
+    # Y == classifications
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3 ,random_state=0)
 
     # Model fitting
@@ -35,6 +38,10 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
     # Test Random Forest
     # Model score
     print(forest.score(X_test,y_test))
+
+    # save the model to disk
+    filename = 'finalized_cohModel.sav'
+    pickle.dump(model, open(filename, 'wb'))
 
 # Basic Artificial Neural Network
 

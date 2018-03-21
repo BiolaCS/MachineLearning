@@ -8,10 +8,7 @@ import tensorflow as tf
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
 import pandas as pd
-
-# Ignore all GPUs, tf random forest does not benefit from it.
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = ""
+import pickle
 
 # Get features and labels from csv file
 
@@ -36,6 +33,9 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
     # Model score
     print(forest.score(X_test,y_test))
 
+    # save the model to disk
+    filename = 'finalized_SmallGroupModel.sav'
+    pickle.dump(model, open(filename, 'wb'))
 # Basic Artificial Neural Network
 
 
