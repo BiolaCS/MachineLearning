@@ -1,13 +1,9 @@
 from __future__ import print_function
-
 import csv
 import numpy as np
-import matplotlib.pyplot as plt
 import tensorflow as tf
-
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
-import pandas as pd
 import pickle
 
 
@@ -24,7 +20,7 @@ import pickle
 loaded_cohModel = pickle.load(open('finalized_cohModel.sav', 'rb'))
 
 #X_test and Y_test are the data from the app
-cohPrediction = loaded_cohModel.score(X_test, Y_test)
+cohPrediction = loaded_cohModel.predict(X)
 print(cohPrediction)
 
 # (2) Run model on Small Group data:
@@ -33,7 +29,7 @@ print(cohPrediction)
 loaded_SmallGroupModel = pickle.load(open('finalized_SmallGroupModel.sav', 'rb'))
 
 #X_test and Y_test are the data from the app
-SmallGroupPrediction = loaded_SmallGroupModel.score(X_test, Y_test)
+SmallGroupPrediction = loaded_SmallGroupModel.predict(X)
 
 print(SmallGroupPrediction)
 
@@ -43,7 +39,7 @@ print(SmallGroupPrediction)
 loaded_ServeGroupModel = pickle.load(open('finalized_ServeGroupModel.sav', 'rb'))
 
 #X_test and Y_test are the data from the app
-ServeGroupPrediction = loaded_ServeGroupModel.score(X_test, Y_test)
+ServeGroupPrediction = loaded_ServeGroupModel.predict(X)
 
 print(ServeGroupPrediction)
 
@@ -53,7 +49,7 @@ print(ServeGroupPrediction)
 loaded_pqModel = pickle.load(open('finalized_pqModel.sav', 'rb'))
 
 #X_test and Y_test are the data from the app
-pqPrediction = loaded_pqModel.score(X_test, Y_test)
+pqPrediction = loaded_pqModel.predict(X)
 
 print(pqPrediction)
 
