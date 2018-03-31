@@ -34,7 +34,7 @@ X = fullCSV[:, 1:colCount]
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3 ,random_state=0)
 
 # Model fitting
-forest = RandomForestClassifier(n_estimators=500)
+forest = RandomForestClassifier(n_estimators=5000)
 forest.fit(X_train,y_train)
 
 # Test Random Forest
@@ -44,7 +44,7 @@ print(forest.score(X_test,y_test))
 
 # save the model to disk
 filename = 'finalized_SmallGroupModel.sav'
-pickle.dump(model, open(filename, 'wb'))
+pickle.dump(forest, open(filename, 'wb'))
 
 # Basic Artificial Neural Network
 

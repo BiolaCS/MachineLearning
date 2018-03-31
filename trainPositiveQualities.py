@@ -44,7 +44,7 @@ print(forest.score(X_test,y_test))
 
 # save the model to disk
 filename = 'finalized_pqModel.sav'
-pickle.dump(model, open(filename, 'wb'))
+pickle.dump(forest, open(filename, 'wb'))
 
 # Basic Artificial Neural Network
 

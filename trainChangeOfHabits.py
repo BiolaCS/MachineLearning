@@ -30,7 +30,7 @@ X = fullCSV[:, 1:colCount]
 # Random Forest Parameters
 
 # Train test splitting data set
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3 ,random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3 ,random_state=0 )
 
 # Model fitting
 forest = RandomForestClassifier(n_estimators=5000)
