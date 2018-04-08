@@ -1,82 +1,108 @@
 import csv
 import pickle
-
+import sys
 # Get features and labels from csv file
 
 # Organize data to be used for running
 
-# just a test:
-X = [[75,85,94,100,65,50,80,40,75,95,90,80,80,80,90,100,99,85,75,65,70,70,50,40,60,60,80,100,20,30,100,50,70,100,70,100,75,60,40,70]]
 
-#Running Models:
+if __name__ == '__main__':
 
-# (1) Run model on change of habits data:
+	if len(sys.argv) > 1:
+		
+		if sys.argv[1] != '':
+			# test case (so you dont have to enter a bunch of stuff)
+			if sys.argv[1] == "sample":
+				print("sample")
+				X = [[75,85,94,100,65,50,80,40,75,95,90,80,80,80,90,100,99,85,75,65,70,70,50,40,60,60,80,100,20,30,100,50,70,100,70,100,75,60,40,70]]
+			else:
+				# Need to strip the userID off the front
+				strippedInput = sys.argv[29:]
+				X = [[strippedInput]]
+			#Running Models:
 
-# load the model from disk
-loaded_cohModel = pickle.load(open('finalized_cohModel.sav', 'rb'))
+			# (1) Run model on change of habits data:
 
-#X_test and Y_test are the data from the app
-cohPrediction = loaded_cohModel.predict(X)
+			# load the model from disk
+			loaded_cohModel = pickle.load(open('finalized_cohModel.sav', 'rb'))
 
-print(cohPrediction)
+			#X_test and Y_test are the data from the app
+			cohPrediction = loaded_cohModel.predict(X)
 
-# Classifications for Change of Habits:
-# 1 == Consistent Motivation
-# 2 == Finding Peace
-# 3 == Being Involved in Community
-# 4 == Health Habits
-# 5 == Balancing Time with Electronics and Life
-# 6 == Money Management
+			print(cohPrediction)
 
-# (2) Run model on Small Group data:
+			# Classifications for Change of Habits:
+			cohArray = []
 
-# load the model from disk
-loaded_SmallGroupModel = pickle.load(open('finalized_SmallGroupModel.sav', 'rb'))
+			cohArray.append("Consistent Motivation")
+			cohArray.append("Finding Peace")
+			cohArray.append("Being Involved in Community")
+			cohArray.append("Health Habits")
+			cohArray.append("Balancing Time with Electronics and Life")
+			cohArray.append("Money Management")
 
-#X_test and Y_test are the data from the app
-SmallGroupPrediction = loaded_SmallGroupModel.predict(X)
+			# (2) Run model on Small Group data:
 
-print(SmallGroupPrediction)
+			# load the model from disk
+			loaded_SmallGroupModel = pickle.load(open('finalized_SmallGroupModel.sav', 'rb'))
 
-# Classifications for Small Group:
-# 1 == Leader
-# 2 == Prayer Warrior
-# 3 == Normal Member
-# 4 == Relational Leader
+			#X_test and Y_test are the data from the app
+			SmallGroupPrediction = loaded_SmallGroupModel.predict(X)
 
-# (3) Run model on Serve Group data:
+			print(SmallGroupPrediction)
 
-# load the model from disk
-loaded_ServeGroupModel = pickle.load(open('finalized_ServeGroupModel.sav', 'rb'))
+			SmallGroupPredictionArray = []
+			# Classifications for Small Group:
+			SmallGroupPredictionArray.append("Leader")
+			SmallGroupPredictionArray.append("Prayer Warrior")
+			SmallGroupPredictionArray.append("Normal Member")
+			SmallGroupPredictionArray.append("Relational Leader")
 
-#X_test and Y_test are the data from the app
-ServeGroupPrediction = loaded_ServeGroupModel.predict(X)
+			# (3) Run model on Serve Group data:
 
-print(ServeGroupPrediction)
+			# load the model from disk
+			loaded_ServeGroupModel = pickle.load(open('finalized_ServeGroupModel.sav', 'rb'))
 
-# Classifications for Serve Group:
-# 1 == Administration
-# 2 == Hospitality
-# 3 == Outreach
-# 4 == Evangelism
-# 5 == Teaching
+			#X_test and Y_test are the data from the app
+			ServeGroupPrediction = loaded_ServeGroupModel.predict(X)
 
-# (4) Run model on Positive Qualities data:
+			print(ServeGroupPrediction)
 
-# load the model from disk
-loaded_pqModel = pickle.load(open('finalized_pqModel.sav', 'rb'))
+			ServeGroupPredectionArray = []
+			# Classifications for Serve Group:
+			ServeGroupPredectionArray.append("Administration")
+			ServeGroupPredectionArray.append("Hospitality")
+			ServeGroupPredectionArray.append("Outreach")
+			ServeGroupPredectionArray.append("Evangelism")
+			ServeGroupPredectionArray.append("Teaching")
 
-#X_test and Y_test are the data from the app
-pqPrediction = loaded_pqModel.predict(X)
+			# (4) Run model on Positive Qualities data:
 
-print(pqPrediction)
+			# load the model from disk
+			loaded_pqModel = pickle.load(open('finalized_pqModel.sav', 'rb'))
 
-# Classifications for Positive Qualities:
-# 1 == Gentleness
-# 2 == Wisdom
-# 3 == Faithuful Servant
-# 4 == Recognizing Faults and Encourage Change
-# 5 == Evangelism
-# 6 == Good Life Decisions
+			#X_test and Y_test are the data from the app
+			pqPrediction = loaded_pqModel.predict(X)
 
-# return cohPrediction, SmallGroupPrediction, ServeGroupPrediction, pqPrediction
+			print(pqPrediction)
+
+			pqPredictionArray = []
+			# Classifications for Positive Qualities:
+			pqPredictionArray.append("Gentleness")
+			pqPredictionArray.append("Wisdom")
+			pqPredictionArray.append("Faithuful Servant")
+			pqPredictionArray.append("Recognizing Faults and Encourage Change")
+			pqPredictionArray.append("Evangelism")
+			pqPredictionArray.append("Good Life Decisions")
+
+			file = open("../PostListener/singleOutput.txt", "a")
+			file.write(sys.argv[1][:28] + '\n')
+			file.write(cohArray[cohPrediction[0]] + '\n')
+			file.write(SmallGroupPredictionArray[SmallGroupPrediction[0]] + '\n')
+			file.write(ServeGroupPredectionArray[ServeGroupPrediction[0]] + '\n')
+			file.write(pqPredictionArray[pqPrediction[0]] + '\n')
+		else:
+			print("Argument present but empty")
+	else:
+		print("No arguments were passed")
+
